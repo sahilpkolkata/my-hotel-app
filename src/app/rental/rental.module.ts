@@ -4,6 +4,7 @@ import { RentalComponent } from './rental.component';
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListItemComponent } from './rental-list-item/rental-list-item.component';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { RentalService } from './shared/rental.service';
@@ -30,7 +31,8 @@ const routes: Routes=[
     ],
     imports:[
         CommonModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        HttpClientModule
     ],
     providers:[
         RentalService
