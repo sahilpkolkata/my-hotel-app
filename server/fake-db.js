@@ -46,8 +46,13 @@ class FakeDb {
     }
 
     async cleanDb(){
-        await User.remove()
-        await Rental.remove()
+        try{
+            await User.remove()
+            await Rental.remove()
+        }catch(err){
+            console.log(err)
+        }
+        
     }
 
     pushRentalsToDb(){

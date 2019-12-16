@@ -10,16 +10,19 @@ const userRoutes = require('./routes/users')
 
 const FakeDb = require('./fake-db')
 
-mongoose.connect(config.DB_URL,{useNewUrlParser:true},function(err){
+mongoose.connect(config.DB_URL,{useNewUrlParser:true, useUnifiedTopology: true},function(err){
     if(!err){
         console.log("Connected to Database")
         const fakeDb = new FakeDb()
-        //fakeDb.seedDb()
+        fakeDb.seedDb()
+    }else{
+        console.log("Database not connected") 
     }
 })
 
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-//app.use(bodyParser.urlencoded({extended:false}))
+
 
 app.use('/api/v1/rentals',rentalRoutes)
 app.use('/api/v1/users',userRoutes)
