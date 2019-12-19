@@ -96,7 +96,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+              "node_modules/ng2-toastr/bundles/ng2-toastr.min.js" 
             ],
             "scripts": []
           }
