@@ -16,7 +16,11 @@
     ],
     "lib": [
       "es2018",
-      "dom"
+      "es5", 
+      "es6", 
+      "dom", 
+      "dom.iterable"
+  
     ]
   },
   "angularCompilerOptions": {

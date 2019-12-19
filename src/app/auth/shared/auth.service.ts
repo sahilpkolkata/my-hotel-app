@@ -55,5 +55,8 @@ export class AuthService{
      public isAuthenticated():boolean{
        return  moment().isBefore(moment.unix(this.decodedToken.exp))
      }
+     public getUsername(){
+       return this.decodedToken.username
+     }
      
 }
