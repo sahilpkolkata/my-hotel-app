@@ -37,4 +37,17 @@
         box-shadow: none;
       }
     }
+    .dropdown-item{
+      font-size: 14px;
+
+      &:active, &:focus{
+        background-color: #ed7424;
+      }
+    }
+  }
+  #username{
+    font-size: 15px;
+  }
+  #logout{
+    font-size: 15px;
   }
