@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ViewChild, ViewEncapsulation } from '@angular
 import { Rental } from '../../shared/rental.model';
 import { Booking } from '../../../booking/shared/booking.model';
 import { HelperService } from '../../../common/service/helper.service';
-import { BookingService } from '../../../booking/shared/booking.service'
+import { BookingService } from '../../../booking/shared/booking.service';
+import { AuthService } from '../../../auth/shared/auth.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrManager } from 'ng6-toastr-notifications';
@@ -23,7 +24,8 @@ export class RentalDetailBookingComponent implements OnInit {
   constructor( private helper: HelperService,
                private modalService: NgbModal,
                private bookingService: BookingService,
-               public toastr: ToastrManager) {
+               public toastr: ToastrManager,
+               public auth: AuthService) {
   
                 }
   public daterange: any = {};
@@ -83,7 +85,9 @@ export class RentalDetailBookingComponent implements OnInit {
               this.newBooking = new Booking()
               this.modalRef.close()
               this.resetDatePicker()
-              this.toastr.successToastr('Booking has been successfully created, check your booking detail in manage section','Success')
+              this.toastr.successToastr('Booking has been successfully created, check your booking detail in manage section','Success',{
+                showCloseButton: true
+              })
             },
             (errResponse:any)=>{
               this.errors = errResponse.error.errors

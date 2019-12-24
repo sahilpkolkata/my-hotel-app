@@ -22,6 +22,7 @@ router.get('/:id',function(req,res){
         })
 })
 
+
 router.post('',UserCtrl.authMiddleware,function(req,res){
     const { title, city, street, category, image, bedrooms, shared, description, dailyRate} = req.body
     const user = res.locals.user
@@ -43,18 +44,19 @@ router.get('',function(req,res){
     const query = city ? {city:city.toLowerCase()} : {}
 
         Rental.find(query)
-        .select('-bookings')
-        .exec(
-            function(err,foundRentals){
-                if(err){
-                    return res.status(422).send({errors:normalizeErrors(err.errors)})
-                  }
-                  if(city && foundRentals === 0){
-                    return res.status(422).send({errors:[{title:"No Rental Found", detail:`There are no rental for city ${city}`}]})
-                  }
-                 return res.json(foundRentals)
-            })
+              .select('-bookings')
+              .exec(
+                    function(err,foundRentals){
+                        if(err){
+                            return res.status(422).send({errors:normalizeErrors(err.errors)})
+                        }
+                        if(city && foundRentals == 0){
+                            return res.status(422).send({errors:[{title:"No Rental Found", detail:`Sorry!! there are no rentals for city ${city}`}]})
+                        }
+                        return res.json(foundRentals)
+                    })
 })
+
 
 
 module.exports = router
