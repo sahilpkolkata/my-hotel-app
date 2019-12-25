@@ -41,26 +41,36 @@ exports.createBooking = function(req,res){
                 return res.status(422).send({errors:[{title:'Invalid Booking',detail:'Chosen dates are already taken!!'}]})
               }
 
-          }) 
+          })         
+}
 
-          function isValidBooking(proposedBooking, rental) {
-            let isValid = true;
-          
-            if (rental.bookings && rental.bookings.length > 0) {
-          
-              isValid = rental.bookings.every(function(booking) {
-                const proposedStart = moment(proposedBooking.startAt);
-                const proposedEnd = moment(proposedBooking.endAt);
-          
-                const actualStart = moment(booking.startAt);
-                const actualEnd = moment(booking.endAt);
-          
-                return ((actualStart < proposedStart && actualEnd < proposedStart) || (proposedEnd < actualEnd && proposedEnd < actualStart));
-              });
+function isValidBooking(proposedBooking, rental) {
+  let isValid = true;
+
+  if (rental.bookings && rental.bookings.length > 0) {
+
+    isValid = rental.bookings.every(function(booking) {
+      const proposedStart = moment(proposedBooking.startAt);
+      const proposedEnd = moment(proposedBooking.endAt);
+
+      const actualStart = moment(booking.startAt);
+      const actualEnd = moment(booking.endAt);
+
+      return ((actualStart < proposedStart && actualEnd < proposedStart) || (proposedEnd < actualEnd && proposedEnd < actualStart));
+    });
+  }
+
+  return isValid;
+}
+
+exports.getUserBookings = function(req,res){
+  const user = res.locals.user
+  Rental.where({user})
+        .populate('rental')
+        .exec(function(err, foundBookings){
+            if(err){
+              return res.status(422).send({errors:normalizeErrors(err.errors)})  
             }
-          
-            return isValid;
-          }
-          
-          
+            return res.json(foundBookings)
+        })
 }
