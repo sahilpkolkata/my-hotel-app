@@ -1,0 +1,32 @@
+
+<section id="userBookings">
+    <h2 class="title"><strong>My Bookings</strong></h2>
+    <div class="row">
+       <ng-container *ngIf="bookings && bookings.length > 0"> 
+        <div *ngFor="let booking of bookings" class="col-md-4" >
+          <div class="card text-center">
+            <div *ngFor="let x of booking.rental" class="card-header">
+              {{x ? x.category : 'Deleted Rental'}}
+            </div>
+            <div class="card-block">
+              <ng-container *ngFor="let x of booking.rental">
+                <h4 class="card-title">{{x.title | ucwords}} - {{x.city | ucwords}} </h4> 
+                <p class="card-text booking-desc">{{x.description}}</p> 
+              </ng-container>
+              <p class="card-text booking-days"> {{booking.startAt | formatDate}} - {{booking.endAt | formatDate}} | {{booking.days}} days</p> 
+              <p class="card-text booking-price"><span>Price: </span> <span class="booking-price-value">{{booking.totalPrice}} $</span></p> 
+              <a *ngFor="let x of booking.rental" class="btn btn-bwm" routerLink="/rentals/{{x._id}}" >Go to Rental</a> 
+            </div>
+            <div class="card-footer text-muted">
+              Created {{booking.createdAt | formatDate}}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div *ngIf="bookings && bookings.length === 0" class="alert alert-warning"> 
+        You have no bookings created go to rentals section and book your place today.
+        <a class="btn btn-bwm" routerLink="/rentals">Available Rentals</a> 
+      </div>
+    </div>
+  </section>
+  
