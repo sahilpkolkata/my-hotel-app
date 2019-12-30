@@ -36,13 +36,27 @@ exports.createBooking = function(req,res){
                   User.update({_id:user.id},{$push:{ bookings: booking}}, function(){})
 
                 })
-                res.json({startAt: booking.startAt, endAt: booking.endAt})
-              }else{
+                return res.json({startAt: booking.startAt, endAt: booking.endAt})
+              }
+              else{
                 return res.status(422).send({errors:[{title:'Invalid Booking',detail:'Chosen dates are already taken!!'}]})
               }
 
-          })         
+          }) 
+         
 }
+
+exports.getUserBookings = function(req,res){
+  const user = res.locals.user
+  Booking.where({user})
+        .populate('rental')
+        .exec(function(err, foundBookings){
+            if(err){
+              return res.status(422).send({errors:normalizeErrors(err.errors)})  
+            }
+            return res.json(foundBookings)
+        })
+  }
 
 function isValidBooking(proposedBooking, rental) {
   let isValid = true;
@@ -61,16 +75,5 @@ function isValidBooking(proposedBooking, rental) {
   }
 
   return isValid;
-}
+}       
 
-exports.getUserBookings = function(req,res){
-  const user = res.locals.user
-  Booking.where({user})
-        .populate('rental')
-        .exec(function(err, foundBookings){
-            if(err){
-              return res.status(422).send({errors:normalizeErrors(err.errors)})  
-            }
-            return res.json(foundBookings)
-        })
-}

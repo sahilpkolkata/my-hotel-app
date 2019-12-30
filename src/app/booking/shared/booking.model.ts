@@ -1,7 +1,7 @@
 import { Rental } from '../../rental/shared/rental.model'
 export class Booking{
     
-    static readonly BOOKING_FORMAT = 'DD-MM-YYYY'
+    static readonly BOOKING_FORMAT = 'YYYY-MM-DD'
     _id: string
     startAt: string
     endAt: string

@@ -8,6 +8,7 @@ import { Daterangepicker } from 'ng2-daterangepicker';
 
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
+import { MapModule } from '../common/map/map.module';
 
 import { AuthGuard } from '../auth/shared/auth.guard'
 import { RentalService } from './shared/rental.service';
@@ -51,7 +52,8 @@ const routes: Routes=[
         HttpClientModule,
         Daterangepicker,
         FormsModule,
-        NgPipesModule
+        NgPipesModule,
+        MapModule
     ],
     providers:[
         RentalService,

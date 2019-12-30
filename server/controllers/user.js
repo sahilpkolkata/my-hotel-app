@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const { normalizeErrors } = require('../helpers/mongoose')
 const jwt = require('jsonwebtoken')
-const config = require('../config/dev')
+const config = require('../config')
 
 exports.auth =  function(req,res){
 
@@ -24,7 +24,7 @@ exports.auth =  function(req,res){
                 username: user.username
               }, config.SECRET , { expiresIn: '1h' });
 
-              res.json(token)
+              return res.json(token)
         }else{
             return res.status(422).send({errors:[{title:'Wrong Data!!',detail:'Incorrect email or password'}]})
         }
@@ -72,7 +72,6 @@ exports.authMiddleware = function(req,res,next){
             if(err){
                 return res.status(422).send({errors:normalizeErrors(err.errors)})
             }
-
             if(user){
                 res.locals.user = user
                 next()

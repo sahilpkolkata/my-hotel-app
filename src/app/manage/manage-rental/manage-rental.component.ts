@@ -20,7 +20,6 @@ export class ManageRentalComponent implements OnInit {
     this.rentalService.getUserRentals().subscribe(
       (userRentals:Rental[])=>{
         this.rentals = userRentals
-        console.log(this.rentals)
       },
       ()=>{
         
@@ -30,10 +29,9 @@ export class ManageRentalComponent implements OnInit {
 
   deleteRental(rentalId:string){
     this.rentalService.deleteRental(rentalId).subscribe(
-      (status)=>{
+      ()=>{
         this.rentals.splice(this.rentalDeleteIndex,1)
         this.rentalDeleteIndex = undefined
-        console.log(status)
       },
       (errResponse:HttpErrorResponse)=>{
         this.toastr.errorToastr(errResponse.error.errors[0].detail, 'Failed')

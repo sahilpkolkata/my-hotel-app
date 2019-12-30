@@ -35,10 +35,10 @@
     <div class="modal-body">
       <em>{{newBooking.days}}</em> nights/ <em>{{rental.dailyRate}}$ </em> per night 
       <p>Guests: <em>{{newBooking.guests}}</em></p>
-      <p>Price: <em>{{newBooking.totalPrice}}</em></p>
+      <p>Price: <em>{{newBooking.totalPrice}} $</em></p>
       <p>Do you confirm booking for selected days?</p>
     </div>
-    <div *ngIf="errors.length > 0" class="alert alert-danger modal-error">
+    <div *ngIf="errors && errors.length > 0" class="alert alert-danger modal-error">
       <p *ngFor="let error of errors">
         {{error.detail}}
       </p>
