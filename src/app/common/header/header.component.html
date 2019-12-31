@@ -18,7 +18,7 @@
           </li>
         </ng-container>
         <ng-container *ngIf="auth.isAuthenticated()">
-          <a id="username" class="nav-link">{{auth.getUsername()}}</a>
+          <a id="username" class="nav-link">{{auth.getUsername() | ucwords}}</a>
           <div class="nav-item dropdown clickable">
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Owner Section
