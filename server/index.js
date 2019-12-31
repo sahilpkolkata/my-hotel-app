@@ -11,7 +11,7 @@ const path = require('path');
 mongoose.Promise = global.Promise
 const FakeDb = require('./fake-db')
 
-mongoose.connect(config.MONGO_URL,{useNewUrlParser:true, useUnifiedTopology: true},function(err){
+mongoose.connect(config.DB_URL,{useNewUrlParser:true, useUnifiedTopology: true},function(err){
     if(!err){
         console.log("Connected to Database")
       
