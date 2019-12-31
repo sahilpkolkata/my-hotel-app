@@ -11,13 +11,13 @@ const path = require('path');
 mongoose.Promise = global.Promise
 const FakeDb = require('./fake-db')
 
-mongoose.connect(config.DB_URL,{useNewUrlParser:true, useUnifiedTopology: true},function(err){
+mongoose.connect(config.MONGO_URL,{useNewUrlParser:true, useUnifiedTopology: true},function(err){
     if(!err){
         console.log("Connected to Database")
-        if(process.env.NODE_ENV !== 'production'){
+      
             const fakeDb = new FakeDb()
             //fakeDb.seedDb()
-        }      
+   
     }else{
         console.log("Database not connected") 
         console.log(err) 
@@ -32,14 +32,13 @@ app.use('/api/v1/rentals',rentalRoutes)
 app.use('/api/v1/users',userRoutes)
 app.use('/api/v1/bookings',bookingRoutes)
 
-if(process.env.NODE_ENV === 'production'){
-    const appPath = path.join(__dirname, '..', 'dist/my-hotel-app')
-    app.use(express.static(appPath))
+const appPath = path.join(__dirname, '..', 'dist/my-hotel-app')
+app.use(express.static(appPath))
 
-    app.get('*',function(req,res){
+app.get('*',function(req,res){
     res.sendFile(path.resolve(appPath,'index.html'))
-})
-}
+ })
+
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT,function(){
