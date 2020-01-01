@@ -22,7 +22,7 @@ class FakeDb {
     }
 
     pushRentalsToDb(){
-
+        
         const user = new User(this.users[0])
         const user1 = new User(this.users[1])
         this.rentals.forEach((rental)=>{
