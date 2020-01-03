@@ -15,6 +15,7 @@
             <div class="card-footer text-muted">
                <p>Created at {{rental.createdAt | formatDate}}</p> 
                <button (click)="rentalDeleteIndex = i" *ngIf="rentalDeleteIndex!==i" type="button" class="btn btn-bwm btn-delete">Delete</button> 
+               <a class="btn btn-warning btn-edit" routerLink="/rentals/{{rental._id}}/edit">Edit</a>
                <div *ngIf="rentalDeleteIndex === i">
                 <strong>Do you confirm delete?</strong> 
                  <button (click)="deleteRental(rental._id)" class="btn btn-success">Yes</button>

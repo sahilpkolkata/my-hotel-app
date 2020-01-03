@@ -1,0 +1,29 @@
+<div [ngStyle]="style">
+    <input class="{{className}}"
+            *ngIf="isActiveInput"
+            type="type"
+            (keyup.enter)="updateEntity()"
+            (keydown.escape)="cancelUpdate()"
+            [(ngModel)]="entity[entityField]"
+            [value]="entity[entityField]">
+
+    <span class="{{className}} inline" *ngIf="!isActiveInput">{{entity[entityField] | ucwords}}</span>
+
+    <div class="inline">
+        <button class="btn btn-sm btn-warning btn-editable" 
+                *ngIf="!isActiveInput"
+                (click)= "isActiveInput = true">
+                Edit
+        </button>
+        <button class="btn btn-sm btn-success btn-editable" 
+                *ngIf="isActiveInput"
+                (click)= "updateEntity()">
+                Save
+        </button>
+        <button class="btn btn-sm btn-danger btn-editable" 
+                *ngIf="isActiveInput"
+                (click)= "cancelUpdate()">
+                Cancel
+        </button>
+    </div>
+</div>

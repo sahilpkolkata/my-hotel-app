@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, 
               private auth: AuthService, 
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              public toastr: ToastrManager) { }
 
   ngOnInit() {
     this.initForm()
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
   login(){
     this.auth.login(this.loginForm.value).subscribe(
       ()=>{
+        this.toastr.successToastr('Hello!! ' + this.auth.getUsername(),'Welcome')
         this.router.navigate(['/rentals'])
       },
       (errorResponse)=>{

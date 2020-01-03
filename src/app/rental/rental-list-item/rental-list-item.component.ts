@@ -8,7 +8,6 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RentalListItemComponent implements OnInit {
 
   @Input() rental : any;
-
   constructor() { }
 
   ngOnInit() {

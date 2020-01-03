@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
     street: { type: String, required: true, min: [4, 'Too short, min is 4 characters']},
     category: { type: String, required: true, lowercase: true },
     image: { type: String, required: true },
-    bedrooms: Number,
+    bedrooms: {type:Number,required: true},
     shared: Boolean,
     description: { type: String, required: true },
     dailyRate: Number,
